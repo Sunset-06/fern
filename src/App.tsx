@@ -1,34 +1,15 @@
-//import { useState, useEffect } from "react";
-//import { BaseDirectory, readDir } from "@tauri-apps/plugin-fs";
-import fetchBooks from "./parser/fetchBooks";
-import Cover from "./components/Cover";
-import "./App.css";
-import { useState, useEffect } from "react";
-import { coverData } from "./types";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Library from "./components/Library.tsx";
+import Reader from "./components/Reader.tsx";
 
 function App() {
-  const [booksList, setBooksList] = useState<coverData[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const books = await fetchBooks(); 
-      setBooksList(books);
-  };
-  fetchData()
-}, []);
-
-  console.log(booksList);
   return (
-    <div className="library">
-      <h1 className="title">Your Books</h1>
-      <div className="shelf">
-      {booksList.map(book => {
-        return(
-          <Cover title={book.title} author={book.author} coverUrl={book.coverUrl} />
-        );
-      })}
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Library />} /> 
+        <Route path="/reader/:bookPath" element={<Reader />} /> 
+      </Routes>
+    </Router>
   );
 }
 
