@@ -1,3 +1,4 @@
+import { readFile } from "@tauri-apps/plugin-fs";
 import { Book } from "epubjs";
 import { useState, useEffect } from "react";
 
@@ -10,8 +11,12 @@ const Cover: React.FC<{ bookPath: string }> = ({ bookPath }) => {
     useEffect(() => {
         const loadBookMetadata = async () => {
           try {
-            //fetch the data (thank you epubjs)
-            const book = new Book(bookPath);
+            //fetch the book as a blob
+            const fileData = await readFile(bookPath);
+            const blob = new Blob([fileData], { type: "application/epub+zip" });
+            //some sort of witchcraft (thank you @tuphan-dn, random github users are what make the world a better place)
+            const buf = await blob.arrayBuffer()
+            const book = new Book(buf as any, { openAs: 'binary' })
             const metadata = await book.loaded.metadata;
             const cover = await book.coverUrl(); 
             //set the fetched data

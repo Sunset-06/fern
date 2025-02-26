@@ -11,12 +11,9 @@
     "fs:default",
     "fs:allow-home-read",
     "fs:allow-home-write",
-    "fs:scope-appcache",
-    "fs:allow-appcache-read",
-    "fs:allow-appcache-write",
     {
       "identifier": "fs:scope",
-      "allow": [{ "path": "$HOME/**" }, { "path": "$APPCACHE/**" }]
+      "allow": [{ "path": "$HOME/Books/**" }, { "path": "$APPCACHE/**" }]
     }
   ]
 }
