@@ -35,7 +35,7 @@ export default function Library() {
       <div className="shelf">
       {booksState.map((entry) => {
         return(
-          <Cover bookPath={entry} />
+          <Cover key={entry} bookPath={entry} />
         );
       })}
       </div>

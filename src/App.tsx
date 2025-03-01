@@ -7,7 +7,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Library />} /> 
-        <Route path="/reader/:bookPath" element={<Reader />} /> 
+        <Route path="/reader" element={<Reader />} /> 
       </Routes>
     </Router>
   );

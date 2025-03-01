@@ -1,6 +1,7 @@
 import { readFile } from "@tauri-apps/plugin-fs";
 import { Book } from "epubjs";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const Cover: React.FC<{ bookPath: string }> = ({ bookPath }) => {
@@ -34,8 +35,14 @@ const Cover: React.FC<{ bookPath: string }> = ({ bookPath }) => {
         loadBookMetadata();
       }, [bookPath]);
 
+      const navigateTo=useNavigate();;
+
+      const openReader = () => {
+        navigateTo(`/reader?path=${encodeURIComponent(bookPath)}`);
+      };
+
     return(
-        <div style={{margin: "30px"}}>
+        <div style={{margin: "30px"}} onClick={openReader}>
             <img width="200" height="300" src={coverUrl} style={{borderRadius: "5px"}}/>
             <div style={{width: "200px", display: "flex", flexDirection: "column", textAlign: "left"}}>
                 <p style={{fontWeight: "bold", fontSize: "1.1em", marginTop: "10px", marginBottom: "2px"}}>{title}</p>
