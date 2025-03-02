@@ -6,6 +6,7 @@ import "../App.css";
 
 export default function Library() {
   const [booksState, setBooksState] = useState<string[]>([]);
+  const [loadState, setLoadState] = useState(true);
 
   useEffect(() => {
     const loadBooks = async () => {
@@ -23,6 +24,8 @@ export default function Library() {
         
       } catch (error) {
         console.error("Error reading directory:", error);
+      } finally{
+        setLoadState(false);
       }
     };
 

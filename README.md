@@ -1,7 +1,22 @@
 This is a Tauri app that will function as an ebook reader. 
 
+This Project is currently ongoing. Progress will be updated in the section below.
+
 ### Current Status
-Development has been restarted using epub.js.
+Development has been restarted using epub.js. The Library and Reader both function properly. Theme and font size options for the reader are implemented and working.
+
+# Get it running
+After cloning the repository, use:
+
+```bash
+npm install # to install required modules
+
+npm run tauri dev # to start a dev server instance
+
+```
+Any changes you make in the javascript part of the app will be updated automatically.
+
+When changing config files, The app will only rebuild the necessary parts.
 
 # I wanted to make my own parser for this
 Commit 3b3152e (First commit to this repo) will have a method to parse covers and titles from epub files, but I quickly scrapped this idea when I realized how cumbersome it would be to ensure all edge cases work properly.

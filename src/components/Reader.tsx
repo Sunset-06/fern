@@ -2,6 +2,7 @@ import ePub from "epubjs";
 import { readFile } from "@tauri-apps/plugin-fs";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import Header from "./Header.tsx";
 
 
 export default function Reader() {
@@ -13,7 +14,7 @@ export default function Reader() {
   useEffect(() => {
     const loadReader = async() =>{
       if (!bookPath || !viewer.current) return;
-      //all over again
+      //open the book all over again
       const fileData = await readFile(bookPath);
       const blob = new Blob([fileData], { type: "application/epub+zip" });
       const buf = await blob.arrayBuffer()
@@ -25,12 +26,15 @@ export default function Reader() {
       renditionRef.current = rendition;
 
       rendition.display();
-      return () => {
-        if(renditionRef.current !=null)
-          renditionRef.current.destroy(); 
-      }
     };
     loadReader();
+
+    return () => {
+      if (renditionRef.current) {
+        renditionRef.current.destroy();
+        renditionRef.current = null;
+      }
+    };
   }, [bookPath]);
 
   if (!bookPath) {
@@ -39,9 +43,8 @@ export default function Reader() {
 
   return (
     <div>
+      <Header renditionRef={renditionRef} />
       <div ref={viewer} />
-      <button onClick={() => renditionRef.current?.prev()}>Prev</button>
-      <button onClick={() => renditionRef.current?.next()}>Next</button>
     </div>
   );
 }
