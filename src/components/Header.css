@@ -1,50 +1,59 @@
-.back-button {
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background 0.3s ease;
-}
-
-.back-button:hover {
-    background: #c0392b;
-}
-
-.nav-buttons {
+.outer{
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
+    background: #333; 
+    color: white; 
+    padding: 10px;
+    margin: 0;
 }
 
-.nav-buttons button {
-    background: #555;
+.left-controls{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.left-controls button {
+    background: #333;
     color: white;
     border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
+    margin-right: 20px;
+    padding: 8px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.2s ease-in-out;
 }
+  
+.left-controls button:hover {
+    background: #444; 
+}
+  
+.left-controls button:focus {
+    outline: blueviolet;
+    box-shadow: none; 
+}
+  
 
-.nav-buttons button:hover {
-    background: #777;
-}
-.controls {
+.right-controls{
     display: flex;
     align-items: center;
-    gap: 10px;
 }
 
-.controls label {
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.controls select {
-    padding: 6px;
-    border-radius: 5px;
+.right-controls button {
+    background: #333;
+    color: white;
     border: none;
-    font-size: 14px;
+    margin-left: 10px;
+    padding: 8px;
     cursor: pointer;
+    transition: background 0.2s ease-in-out;
 }
+  
+.right-controls button:hover {
+    background: #444; 
+}
+  
+.right-controls button:focus {
+    outline: blueviolet;
+    box-shadow: none; 
+}
+  
