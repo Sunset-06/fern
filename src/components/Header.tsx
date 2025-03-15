@@ -10,12 +10,15 @@ interface Props{
 }
 
 export default function Header(props: Props) {
+  const [isHovered, setIsHovered] = useState(false);
   const [fontSize, setFontSize] = useState(16);
   const navigateTo=useNavigate();
+
+  // For keyboard handling
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!props.renditionRef.current) return; 
-      if ((event.altKey && event.key === "ArrowLeft") || event.key ==="KeyL") {
+      if (event.altKey && event.key === "ArrowLeft"){
         handleCloseBook();
       }
       else if (event.key === "ArrowLeft") {
@@ -29,9 +32,18 @@ export default function Header(props: Props) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  //function to show the header on hover
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      setIsHovered(event.clientY < 70);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   //function to go back and cleanup
-  const handleCloseBook = () =>{
+  const handleCloseBook = () =>{ 
     props.renditionRef.current?.destroy();
     props.renditionRef.current = null;
     navigateTo("/");
@@ -57,6 +69,8 @@ export default function Header(props: Props) {
         default:
           break;
       }
+      setIsHovered(false);
+      event.target.blur();
   };
   
   //Change font size of the rendition
@@ -64,33 +78,34 @@ export default function Header(props: Props) {
     const newSize = parseInt(event.target.value, 10);
     setFontSize(newSize);
     props.renditionRef.current?.themes.fontSize(`${newSize}px`);
+    event.target.blur();
   };
 
   return (
-    <>
-    <div className="outer">
-      <div className="left-controls">
-        <button onClick={handleCloseBook}><IconArrowLeft /></button> 
-        <h3>{props.title}</h3>
-      </div>
+    <div className={`full-header ${isHovered ? "visible" : ""}`}>
+      <div className="outer">
+        <div className="left-controls">
+          <button onClick={handleCloseBook}><IconArrowLeft /></button> 
+          <h3>{props.title}</h3>
+        </div>
 
-      <div className="right-controls">
-        <select value={fontSize} onChange={handleFontSizeChange}>
-          {[10, 12, 14, 16, 18, 20, 24, 28, 30, 32].map((size) => (
-              <option key={size} value={size}>{size}px</option>
-          ))}
-        </select>
+        <div className="right-controls">
+          <select value={fontSize} onChange={handleFontSizeChange}>
+            {[10, 12, 14, 16, 18, 20, 24, 28, 30, 32].map((size) => (
+                <option key={size} value={size}>{size}px</option>
+            ))}
+          </select>
 
-        <select onChange={handleThemeChange}>
-            <option value="white">White</option>
-            <option value="black">Black</option>
-            <option value="sepia">Sepia</option>
-        </select>
+          <select onChange={handleThemeChange}>
+              <option value="white">White</option>
+              <option value="black">Black</option>
+              <option value="sepia">Sepia</option>
+          </select>
 
-        <button onClick={() => props.renditionRef.current?.prev()}><IconCaretLeftFilled /></button>
-        <button onClick={() => props.renditionRef.current?.next()}><IconCaretRightFilled /></button>
+          <button onClick={() => props.renditionRef.current?.prev()}><IconCaretLeftFilled /></button>
+          <button onClick={() => props.renditionRef.current?.next()}><IconCaretRightFilled /></button>
+        </div>
       </div>
     </div>
-    </>
   );
 }
