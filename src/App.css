@@ -5,12 +5,29 @@
   line-height: 24px;
   font-weight: 400;
   color: #0f0f0f;
-  background-color: #fbeff0;
+  background-color: whitesmoke;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* For Library.tsx */
+.main-header{
+  display: flex;
+  background-color: #0f5257;
+  align-items: center;
+}
+
+.logo{
+  height: 4em;
+  margin: 2em;
 }
 
 .shelf {
@@ -18,13 +35,16 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
   text-align: center;
 }
 
 .title{
   font-size: 3em;
   font-weight:800;
+  color: aliceblue;
+  flex-grow: 1;
+  margin-left: -4em;
 }
 
 .row {
@@ -32,6 +52,33 @@
   justify-content: center;
 }
 
+/*  For Cover.tsx  */
+.main-book{
+  margin: 30px; 
+  cursor: pointer;
+}   
+
+.cover-text-box{
+  width: 200px;
+  display: flex; 
+  flex-direction: column; 
+  text-align: left;
+}
+
+.title-text{
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-top: 10px;
+}
+
+.author-text{
+  align-self: flex-start; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+}
+
+/* General App-wide styling*/
 a {
   font-weight: 500;
   color: #646cff;

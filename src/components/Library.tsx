@@ -32,15 +32,22 @@ export default function Library() {
   }, []);
 
   return (
-    <div className="library">
-      <h1 className="title">Your Books</h1>
-      <div className="shelf">
-      {booksState.map((entry) => {
-        return(
-          <Cover key={entry} bookPath={entry} />
-        );
-      })}
+    <>
+      <div className="main-header">
+        <img className="logo" src="src/assets/Logo.png" />
+        <h1 className="title">Your Library</h1>
       </div>
-    </div>
+
+
+      <div className="library">
+        <div className="shelf">
+        {booksState.map((entry) => {
+          return(
+            <Cover key={entry} bookPath={entry} />
+          );
+        })}
+        </div>
+      </div>
+    </>
   );
 }

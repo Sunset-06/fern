@@ -2,6 +2,7 @@ import { readFile } from "@tauri-apps/plugin-fs";
 import { Book } from "epubjs";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "../App.css";
 
 
 const Cover: React.FC<{ bookPath: string }> = ({ bookPath }) => {
@@ -42,11 +43,11 @@ const Cover: React.FC<{ bookPath: string }> = ({ bookPath }) => {
       };
 
     return(
-        <div style={{margin: "30px"}} onClick={openReader}>
+        <div className="main-book" onClick={openReader}>
             <img width="200" height="300" src={coverUrl} style={{borderRadius: "5px"}}/>
-            <div style={{width: "200px", display: "flex", flexDirection: "column", textAlign: "left"}}>
-                <p style={{fontWeight: "bold", fontSize: "1.1em", marginTop: "10px", marginBottom: "2px"}}>{title}</p>
-                <p style={{alignSelf: "flex-start", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"}}>{author}</p>
+            <div className="cover-text-box">
+                <p className="title-text">{title}</p>
+                <p className="author-text">{author}</p>
             </div>
         </div>
     );
